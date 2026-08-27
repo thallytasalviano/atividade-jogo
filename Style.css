@@ -1,0 +1,281 @@
+/* ======================================================
+   RESET
+====================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ======================================================
+   VARIÁVEIS
+====================================================== */
+
+:root {
+  --cor-primaria: #3498db;
+  --cor-secundaria: #217dbb;
+
+  --cor-fundo: #141414;
+
+  --cor-card: #1f1f1f;
+
+  --cor-texto: #ffffff;
+
+  --cor-texto-secundario: #cccccc;
+
+  --cor-borda: #333;
+
+  --cor-editar: #f39c12;
+
+  --cor-excluir: #e74c3c;
+
+  --cor-cancelar: #777;
+
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ======================================================
+   BODY
+====================================================== */
+
+body {
+  background: var(--cor-fundo);
+
+  color: var(--cor-texto);
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+header {
+  background: var(--cor-primaria);
+
+  padding: 25px;
+
+  text-align: center;
+
+  box-shadow: var(--sombra);
+}
+
+header h1 {
+  margin-bottom: 8px;
+}
+
+header p {
+  color: #f2f2f2;
+}
+
+
+/* ======================================================
+   CONTAINER
+====================================================== */
+
+.container {
+  width: 90%;
+
+  max-width: 1200px;
+
+  margin: 30px auto;
+}
+
+
+/* ======================================================
+   FORMULÁRIO
+====================================================== */
+
+.formulario {
+  background: var(--cor-card);
+
+  padding: 25px;
+
+  border-radius: 10px;
+
+  margin-bottom: 30px;
+
+  box-shadow: var(--sombra);
+}
+
+.formulario h2 {
+  margin-bottom: 20px;
+}
+
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-weight: bold;
+}
+
+.campo input {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #2b2b2b;
+
+  color: white;
+
+  font-size: 16px;
+}
+
+.campo input:focus {
+  outline: 2px solid var(--cor-primaria);
+}
+
+
+/* ======================================================
+   BOTÕES
+====================================================== */
+
+button {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: var(--cor-primaria);
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  margin-top: 5px;
+}
+
+button:hover {
+  background: var(--cor-secundaria);
+}
+
+
+/* ======================================================
+   BOTÃO CANCELAR
+====================================================== */
+
+.btn-cancelar {
+  background: var(--cor-cancelar);
+}
+
+.btn-cancelar:hover {
+  background: #555;
+}
+
+
+/* ======================================================
+   PAINEL
+====================================================== */
+
+.painel {
+  background: var(--cor-card);
+
+  padding: 25px;
+
+  border-radius: 10px;
+
+  box-shadow: var(--sombra);
+}
+
+.topo-lista {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+}
+
+#contador {
+  background: var(--cor-primaria);
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+}
+
+
+/* ======================================================
+   LISTA
+====================================================== */
+
+.lista-pessoas {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(260px, 1fr));
+
+  gap: 20px;
+}
+
+
+/* ======================================================
+   CARD
+====================================================== */
+
+.card {
+  background: #2a2a2a;
+
+  border-radius: 10px;
+
+  padding: 20px;
+
+  border-left: 6px solid var(--cor-primaria);
+
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+}
+
+.card p {
+  margin: 8px 0;
+
+  color: var(--cor-texto-secundario);
+}
+
+
+/* ======================================================
+   BOTÕES DO CARD
+====================================================== */
+
+.botoes-card {
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 15px;
+}
+
+.botoes-card button {
+  margin-top: 0;
+
+  pad
