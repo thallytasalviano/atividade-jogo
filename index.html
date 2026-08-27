@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Cadastro de Pessoas</title>
+    <title>Miraculous</title>
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -12,9 +12,9 @@
   <body>
 
     <header>
-      <h1>👤 Cadastro de Pessoas</h1>
+      <h1>🐞 Miraculous</h1>
 
-      <p>CRUD - Cadastro de Pessoas</p>
+      <p>Cadastro de Personagens</p>
     </header>
 
     <main class="container">
@@ -25,11 +25,9 @@
 
       <section class="formulario">
 
-        <h2 id="tituloFormulario">
-          Nova Pessoa
-        </h2>
+        <h2 id="tituloFormulario">Novo Personagem</h2>
 
-        <form id="formPessoa">
+        <form id="formPersonagem">
 
           <div class="campo">
             <label for="nome">Nome</label>
@@ -37,7 +35,7 @@
             <input
               type="text"
               id="nome"
-              placeholder="Digite o nome completo"
+              placeholder="Digite o nome do personagem"
               required
             />
           </div>
@@ -48,59 +46,84 @@
             <input
               type="number"
               id="idade"
-              min="0"
-              max="120"
-              placeholder="Digite a idade"
+              min="1"
+              max="100"
+              placeholder="Ex: 14"
               required
             />
           </div>
 
           <div class="campo">
-            <label for="cpf">CPF</label>
+            <label for="identidade">Identidade</label>
 
             <input
               type="text"
-              id="cpf"
-              placeholder="000.000.000-00"
+              id="identidade"
+              placeholder="Ex: Marinette Dupain-Cheng"
               required
             />
           </div>
 
           <div class="campo">
-            <label for="telefone">Telefone</label>
+            <label for="miraculous">Miraculous</label>
 
-            <input
-              type="tel"
-              id="telefone"
-              placeholder="(84) 99999-9999"
-              required
-            />
+            <select id="miraculous" required>
+
+              <option value="">Selecione</option>
+
+              <option>Joaninha</option>
+
+              <option>Gato</option>
+
+              <option>Raposa</option>
+
+              <option>Tartaruga</option>
+
+              <option>Abelha</option>
+
+              <option>Dragão</option>
+
+              <option>Serpente</option>
+
+              <option>Macaco</option>
+
+              <option>Rato</option>
+
+              <option>Borboleta</option>
+
+            </select>
           </div>
 
           <div class="campo">
-            <label for="email">E-mail</label>
-
-            <input
-              type="email"
-              id="email"
-              placeholder="exemplo@email.com"
-              required
-            />
-          </div>
-
-          <div class="campo">
-            <label for="cidade">Cidade</label>
+            <label for="poder">Poder</label>
 
             <input
               type="text"
-              id="cidade"
-              placeholder="Digite a cidade"
+              id="poder"
+              placeholder="Ex: Lucky Charm"
               required
             />
           </div>
 
-          <button type="submit" id="btnCadastrar">
-            Cadastrar Pessoa
+          <div class="campo">
+            <label for="tipo">Tipo</label>
+
+            <select id="tipo" required>
+
+              <option value="">Selecione</option>
+
+              <option>Herói</option>
+
+              <option>Vilão</option>
+
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            id="btnCadastrar"
+          >
+            Cadastrar Personagem
           </button>
 
           <button
@@ -125,7 +148,7 @@
 
         <div class="topo-lista">
 
-          <h2>Pessoas Cadastradas</h2>
+          <h2>Personagens Cadastrados</h2>
 
           <span id="contador">
             Total: 0
@@ -134,8 +157,8 @@
         </div>
 
         <div
-          id="listaPessoas"
-          class="lista-pessoas"
+          id="listaPersonagens"
+          class="lista-personagens"
         ></div>
 
       </section>
@@ -145,4 +168,4 @@
     <script src="js/script.js"></script>
 
   </body>
-    </html>
+          </html>
