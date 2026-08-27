@@ -14,8 +14,9 @@
 ====================================================== */
 
 :root {
-  --cor-primaria: #3498db;
-  --cor-secundaria: #217dbb;
+  --cor-primaria: #e91e63;
+
+  --cor-secundaria: #c2185b;
 
   --cor-fundo: #141414;
 
@@ -24,8 +25,6 @@
   --cor-texto: #ffffff;
 
   --cor-texto-secundario: #cccccc;
-
-  --cor-borda: #333;
 
   --cor-editar: #f39c12;
 
@@ -118,7 +117,8 @@ header p {
   font-weight: bold;
 }
 
-.campo input {
+.campo input,
+.campo select {
   width: 100%;
 
   padding: 12px;
@@ -134,7 +134,8 @@ header p {
   font-size: 16px;
 }
 
-.campo input:focus {
+.campo input:focus,
+.campo select:focus {
   outline: 2px solid var(--cor-primaria);
 }
 
@@ -222,7 +223,7 @@ button:hover {
    LISTA
 ====================================================== */
 
-.lista-pessoas {
+.lista-personagens {
   display: grid;
 
   grid-template-columns:
@@ -278,4 +279,42 @@ button:hover {
 .botoes-card button {
   margin-top: 0;
 
-  pad
+  padding: 10px;
+
+  font-size: 14px;
+}
+
+.btn-editar {
+  background: var(--cor-editar);
+}
+
+.btn-editar:hover {
+  background: #d68910;
+}
+
+.btn-excluir {
+  background: var(--cor-excluir);
+}
+
+.btn-excluir:hover {
+  background: #c0392b;
+}
+
+
+/* ======================================================
+   RESPONSIVIDADE
+====================================================== */
+
+@media (max-width: 700px) {
+
+  .topo-lista {
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  .botoes-card {
+    flex-direction: column;
+  }
+
+   }
