@@ -1,229 +1,147 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Miraculous - Cadastro de Personagens</title>
+    <title>Miraculous - Personagens</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-  <body>
-
-    <!-- ======================================== -->
-    <!-- HEADER -->
-    <!-- ======================================== -->
+<body>
 
     <header>
-
-      <h1>🐞 Miraculous</h1>
-
-      <p>Cadastro de Personagens</p>
-
+        <h1>🐞 Miraculous</h1>
+        <p>Cadastro de Personagens</p>
     </header>
-
 
     <main class="container">
 
-      <!-- ======================================== -->
-      <!-- FORMULÁRIO -->
-      <!-- ======================================== -->
+        <!-- FORMULÁRIO -->
+        <section class="formulario">
 
-      <section class="formulario">
+            <h2 id="tituloFormulario">
+                👤 Cadastrar Personagem
+            </h2>
 
-        <h2 id="tituloFormulario">
-          👤 Novo Personagem
-        </h2>
+            <form id="formPersonagem">
 
+                <div class="campo">
+                    <label for="nome">Nome do personagem</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Ex: Ladybug"
+                        required
+                    >
+                </div>
 
-        <form id="formPersonagem">
+                <div class="campo">
+                    <label for="idade">Idade</label>
+                    <input
+                        type="number"
+                        id="idade"
+                        placeholder="Ex: 15"
+                        min="0"
+                        required
+                    >
+                </div>
 
-          <div class="campo">
+                <div class="campo">
+                    <label for="identidade">Identidade</label>
+                    <input
+                        type="text"
+                        id="identidade"
+                        placeholder="Ex: Marinette Dupain-Cheng"
+                        required
+                    >
+                </div>
 
-            <label for="nome">
-              Nome
-            </label>
+                <div class="campo">
+                    <label for="miraculous">Miraculous</label>
 
-            <input
-              type="text"
-              id="nome"
-              placeholder="Digite o nome do personagem"
-              required
-            />
+                    <select id="miraculous" required>
+                        <option value="">Selecione</option>
+                        <option value="Joaninha">Joaninha</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Raposa">Raposa</option>
+                        <option value="Tartaruga">Tartaruga</option>
+                        <option value="Abelha">Abelha</option>
+                        <option value="Borboleta">Borboleta</option>
+                    </select>
+                </div>
 
-          </div>
+                <div class="campo">
+                    <label for="poder">Poder</label>
+                    <input
+                        type="text"
+                        id="poder"
+                        placeholder="Ex: Criar objetos"
+                        required
+                    >
+                </div>
 
+                <div class="campo">
+                    <label for="tipo">Tipo</label>
 
-          <div class="campo">
+                    <select id="tipo" required>
+                        <option value="">Selecione</option>
+                        <option value="Herói">Herói</option>
+                        <option value="Heroína">Heroína</option>
+                        <option value="Vilão">Vilão</option>
+                        <option value="Aliado">Aliado</option>
+                    </select>
+                </div>
 
-            <label for="idade">
-              Idade
-            </label>
+                <button type="submit" id="btnSalvar">
+                    🐞 Cadastrar Personagem
+                </button>
 
-            <input
-              type="number"
-              id="idade"
-              placeholder="Digite a idade"
-              required
-            />
+                <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btn-cancelar"
+                    style="display: none;"
+                >
+                    Cancelar
+                </button>
 
-          </div>
+            </form>
 
-
-          <div class="campo">
-
-            <label for="identidade">
-              Identidade
-            </label>
-
-            <input
-              type="text"
-              id="identidade"
-              placeholder="Ex: Marinette Dupain-Cheng"
-              required
-            />
-
-          </div>
-
-
-          <div class="campo">
-
-            <label for="miraculous">
-              Miraculous
-            </label>
-
-            <select id="miraculous" required>
-
-              <option value="">
-                Selecione
-              </option>
-
-              <option>Joaninha</option>
-
-              <option>Gato</option>
-
-              <option>Raposa</option>
-
-              <option>Tartaruga</option>
-
-              <option>Abelha</option>
-
-              <option>Borboleta</option>
-
-            </select>
-
-          </div>
-
-
-          <div class="campo">
-
-            <label for="poder">
-              Poder
-            </label>
-
-            <input
-              type="text"
-              id="poder"
-              placeholder="Digite o poder"
-              required
-            />
-
-          </div>
+        </section>
 
 
-          <div class="campo">
+        <!-- LISTA DOS PERSONAGENS -->
+        <section class="personagens">
 
-            <label for="tipo">
-              Tipo
-            </label>
+            <div class="titulo-lista">
 
-            <select id="tipo" required>
+                <h2>👥 Personagens Cadastrados</h2>
 
-              <option value="">
-                Selecione
-              </option>
+                <span id="contador">
+                    Total: 0
+                </span>
 
-              <option>Heroína</option>
+            </div>
 
-              <option>Herói</option>
+            <div
+                id="listaPersonagens"
+                class="lista-personagens"
+            >
+            </div>
 
-              <option>Vilão</option>
-
-              <option>Aliado</option>
-
-            </select>
-
-          </div>
-
-
-          <button
-            type="submit"
-            id="btnCadastrar"
-          >
-            🐞 Cadastrar Personagem
-          </button>
-
-
-          <button
-            type="button"
-            id="btnCancelar"
-            class="btn-cancelar"
-            hidden
-          >
-            ✕ Cancelar Edição
-          </button>
-
-        </form>
-
-      </section>
-
-
-      <!-- ======================================== -->
-      <!-- PAINEL -->
-      <!-- ======================================== -->
-
-      <section class="painel">
-
-        <div class="topo-lista">
-
-          <h2>
-            👥 Personagens Cadastrados
-          </h2>
-
-          <span id="contador">
-            Total: 0
-          </span>
-
-        </div>
-
-
-        <div
-          id="listaPersonagens"
-          class="lista-personagens"
-        ></div>
-
-      </section>
+        </section>
 
     </main>
 
 
-    <!-- ======================================== -->
-    <!-- RODAPÉ -->
-    <!-- ======================================== -->
-
     <footer>
-
-      🐞 Miraculous - CRUD de Personagens
-
+        <p>🐞 Miraculous - CRUD de Personagens</p>
     </footer>
 
 
     <script src="js/script.js"></script>
 
-  </body>
-</html>
+</
