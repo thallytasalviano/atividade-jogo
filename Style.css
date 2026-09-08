@@ -1,498 +1,348 @@
-/* ======================================================
-   RESET
-====================================================== */
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-
-/* ======================================================
-   VARIÁVEIS
-====================================================== */
-
-:root {
-
-  --cor-primaria: #e50920;
-
-  --cor-secundaria: #b30015;
-
-  --cor-fundo: #090d11;
-
-  --cor-card: #111418;
-
-  --cor-card-2: #171a1f;
-
-  --cor-texto: #ffffff;
-
-  --cor-texto-secundario: #cccccc;
-
-  --cor-editar: #ffb000;
-
-  --cor-excluir: #e50920;
-
-  --cor-cancelar: #666970;
-
-  --borda: #292d32;
-
-  --sombra:
-    0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-
-/* ======================================================
-   BODY
-====================================================== */
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
 
-  background: var(--cor-fundo);
+    background-color: #090d11;
 
-  color: var(--cor-texto);
+    color: white;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 
-/* ======================================================
+/* =========================
    HEADER
-====================================================== */
+========================= */
 
 header {
-
-  background:
-    linear-gradient(
-      90deg,
-      #8d0010,
-      #e50920,
-      #8d0010
+    background: linear-gradient(
+        90deg,
+        #8d0010,
+        #e50920,
+        #8d0010
     );
 
-  padding: 20px;
+    text-align: center;
 
-  text-align: center;
+    padding: 25px;
 
-  border-radius: 0 0 12px 12px;
-
-  box-shadow: var(--sombra);
-
-  border-bottom: 2px solid #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 header h1 {
+    font-size: 38px;
 
-  font-size: 38px;
-
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 header p {
+    font-size: 18px;
 
-  font-size: 18px;
-
-  font-weight: bold;
+    font-weight: bold;
 }
 
 
-/* ======================================================
+/* =========================
    CONTAINER
-====================================================== */
+========================= */
 
 .container {
+    width: 95%;
 
-  width: 95%;
+    max-width: 1400px;
 
-  max-width: 1400px;
-
-  margin: 20px auto;
+    margin: 25px auto;
 }
 
 
-/* ======================================================
+/* =========================
    FORMULÁRIO
-====================================================== */
+========================= */
 
 .formulario {
+    background-color: #111418;
 
-  background: var(--cor-card);
+    border: 1px solid #292d32;
 
-  border: 1px solid var(--borda);
+    border-radius: 10px;
 
-  padding: 20px;
+    padding: 25px;
 
-  border-radius: 10px;
+    margin-bottom: 25px;
 
-  margin-bottom: 20px;
-
-  box-shadow: var(--sombra);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .formulario h2 {
+    color: #ff6680;
 
-  color: #ff6680;
-
-  margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 
-/* ======================================================
+/* =========================
    CAMPOS
-====================================================== */
+========================= */
 
 .campo {
-
-  margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .campo label {
+    display: block;
 
-  display: block;
+    margin-bottom: 7px;
 
-  margin-bottom: 7px;
-
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .campo input,
 .campo select {
 
-  width: 100%;
+    width: 100%;
 
-  padding: 12px;
+    padding: 12px;
 
-  border-radius: 6px;
+    border-radius: 6px;
 
-  border: 1px solid #363a3f;
+    border: 1px solid #363a3f;
 
-  background: #202226;
+    background-color: #202226;
 
-  color: white;
+    color: white;
 
-  font-size: 15px;
+    font-size: 15px;
 }
 
 .campo input:focus,
 .campo select:focus {
 
-  outline: 2px solid var(--cor-primaria);
+    outline: 2px solid #e50920;
 }
 
 
-/* ======================================================
+/* =========================
    BOTÕES
-====================================================== */
+========================= */
 
 button {
 
-  width: 100%;
+    width: 100%;
 
-  padding: 13px;
+    padding: 13px;
 
-  border: none;
+    margin-top: 5px;
 
-  border-radius: 6px;
+    border: none;
 
-  background: var(--cor-primaria);
+    border-radius: 6px;
 
-  color: white;
+    background-color: #e50920;
 
-  font-size: 16px;
+    color: white;
 
-  font-weight: bold;
+    font-size: 16px;
 
-  cursor: pointer;
+    font-weight: bold;
 
-  transition: 0.3s;
+    cursor: pointer;
 
-  margin-top: 5px;
+    transition: 0.3s;
 }
 
 button:hover {
 
-  background: var(--cor-secundaria);
+    background-color: #b30015;
+
+    transform: translateY(-1px);
 }
-
-
-/* ======================================================
-   CANCELAR
-====================================================== */
 
 .btn-cancelar {
 
-  background: var(--cor-cancelar);
+    background-color: #666970;
 }
 
 .btn-cancelar:hover {
 
-  background: #4e5055;
+    background-color: #4e5055;
 }
 
 
-/* ======================================================
-   PAINEL
-====================================================== */
+/* =========================
+   LISTA
+========================= */
 
-.painel {
+.personagens {
 
-  background: var(--cor-card);
+    background-color: #111418;
 
-  border: 1px solid var(--borda);
+    border: 1px solid #292d32;
 
-  padding: 18px;
+    border-radius: 10px;
 
-  border-radius: 10px;
+    padding: 20px;
 
-  box-shadow: var(--sombra);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.topo-lista {
+.titulo-lista {
 
-  display: flex;
+    display: flex;
 
-  justify-content: space-between;
+    justify-content: space-between;
 
-  align-items: center;
+    align-items: center;
 
-  margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
-.topo-lista h2 {
+.titulo-lista h2 {
 
-  color: #ff6680;
+    color: #ff6680;
 }
 
 #contador {
 
-  background: var(--cor-primaria);
+    background-color: #e50920;
 
-  padding: 9px 16px;
+    padding: 8px 15px;
 
-  border-radius: 20px;
+    border-radius: 20px;
 
-  font-weight: bold;
+    font-weight: bold;
 }
 
 
-/* ======================================================
-   LISTA
-====================================================== */
+/* =========================
+   CARDS
+========================= */
 
 .lista-personagens {
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+    grid-template-columns:
+        repeat(3, 1fr);
 
-  gap: 18px;
+    gap: 20px;
 }
 
 
-/* ======================================================
-   CARD
-====================================================== */
-
 .card {
 
-  background: #101317;
+    background-color: #171a1f;
 
-  border: 1px solid #292d32;
+    border: 1px solid #292d32;
 
-  border-radius: 9px;
+    border-radius: 10px;
 
-  padding: 10px;
+    padding: 20px;
 
-  display: flex;
+    transition: 0.3s;
 
-  flex-direction: column;
+    display: flex;
 
-  transition: 0.3s;
+    flex-direction: column;
 }
 
 .card:hover {
 
-  transform: translateY(-4px);
+    transform: translateY(-5px);
 
-  border-color: #555;
+    border-color: #e50920;
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.5);
 }
 
 
-/* ======================================================
-   CONTEÚDO DO CARD
-====================================================== */
+/* =========================
+   CABEÇALHO DO CARD
+========================= */
 
-.card-conteudo {
+.card-cabecalho {
 
-  display: flex;
+    display: flex;
 
-  gap: 14px;
+    align-items: center;
 
-  align-items: flex-start;
+    gap: 15px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #292d32;
+
+    margin-bottom: 10px;
+}
+
+.avatar {
+
+    width: 60px;
+
+    height: 60px;
+
+    min-width: 60px;
+
+    border-radius: 50%;
+
+    background-color: #20242a;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 30px;
+}
+
+.card h3 {
+
+    color: #ff5c76;
+
+    font-size: 21px;
+
+    margin-bottom: 6px;
+}
+
+.tipo {
+
+    display: inline-block;
+
+    background-color: #30343a;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
 }
 
 
-/* ======================================================
-   IMAGEM
-====================================================== */
+/* =========================
+   PARÂMETROS
+========================= */
 
-.card img {
+.parametros {
 
-  width: 155px;
+    flex: 1;
 
-  height: 175px;
-
-  object-fit: cover;
-
-  border-radius: 7px;
-
-  flex-shrink: 0;
+    padding: 5px 0 10px;
 }
 
+.parametros p {
 
-/* ======================================================
-   INFORMAÇÕES
-====================================================== */
+    color: #cccccc;
 
-.informacoes {
+    margin: 10px 0;
 
-  flex: 1;
-}
-
-.informacoes h3 {
-
-  color: #ff5c76;
-
-  font-size: 20px;
-
-  margin: 8px 0 12px;
-}
-
-.informacoes p {
-
-  margin: 8px 0;
-
-  color: var(--cor-texto-secundario);
-
-  font-size: 14px;
-
-  line-height: 1.2;
-}
-
-.informacoes strong {
-
-  color: white;
-}
-
-
-/* ======================================================
-   BOTÕES DO CARD
-====================================================== */
-
-.botoes-card {
-
-  display: flex;
-
-  gap: 8px;
-
-  margin-top: 10px;
-}
-
-.botoes-card button {
-
-  margin: 0;
-
-  padding: 9px;
-
-  font-size: 14px;
-}
-
-.btn-editar {
-
-  background: var(--cor-editar);
-}
-
-.btn-editar:hover {
-
-  background: #d99200;
-}
-
-.btn-excluir {
-
-  background: var(--cor-excluir);
-}
-
-.btn-excluir:hover {
-
-  background: #b80012;
-}
-
-
-/* ======================================================
-   FOOTER
-====================================================== */
-
-footer {
-
-  text-align: center;
-
-  padding: 25px;
-
-  color: #999;
-
-  font-size: 16px;
-}
-
-
-/* ======================================================
-   RESPONSIVIDADE
-====================================================== */
-
-@media (max-width: 1000px) {
-
-  .lista-personagens {
-
-    grid-template-columns:
-      repeat(2, 1fr);
-  }
-
-}
-
-@media (max-width: 650px) {
-
-  .lista-personagens {
-
-    grid-template-columns: 1fr;
-  }
-
-  .card-conteudo {
-
-    flex-direction: column;
-  }
-
-  .card img {
-
-    width: 100%;
-
-    height: 220px;
-  }
-
-  .topo-lista {
-
-    flex-direction: column;
-
-    gap: 12px;
-  }
-
-  .botoes-card {
-
-    flex-direction: column;
-  }
-
-   }
+    font-size: 14px;
