@@ -1,4 +1,4 @@
-    const formulario = document.getElementById("formPrincesa");
+const formulario = document.getElementById("formPrincesa");
 const lista = document.getElementById("listaPrincesas");
 const botao = document.getElementById("botao");
 
@@ -65,19 +65,19 @@ function mostrarPrincesas() {
 
             <div class="botoes">
 
-    <button class="editar" onclick="editarPrincesa(${index})">
-        Editar
-    </button>
+                <button class="editar" onclick="editarPrincesa(${index})">
+                    Editar
+                </button>
 
-    <button class="excluir" onclick="excluirPrincesa(${index})">
-        Excluir
-    </button>
+                <button class="excluir" onclick="excluirPrincesa(${index})">
+                    Excluir
+                </button>
 
-    <button onclick="jogarPrincesa(${index})">
-        Jogar
-    </button>
+                <button onclick="jogarPrincesa(${index})">
+                    Jogar
+                </button>
 
-</div>
+            </div>
         `;
 
         lista.appendChild(card);
@@ -116,6 +116,7 @@ function excluirPrincesa(index) {
         mostrarPrincesas();
     }
 }
+
 function jogarPrincesa(index) {
 
     localStorage.setItem(
