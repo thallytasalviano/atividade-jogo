@@ -64,14 +64,20 @@ function mostrarPrincesas() {
             <p><strong>🧠 Inteligência:</strong> ${princesa.inteligencia}</p>
 
             <div class="botoes">
-                <button class="editar" onclick="editarPrincesa(${index})">
-                    Editar
-                </button>
 
-                <button class="excluir" onclick="excluirPrincesa(${index})">
-                    Excluir
-                </button>
-            </div>
+    <button class="editar" onclick="editarPrincesa(${index})">
+        Editar
+    </button>
+
+    <button class="excluir" onclick="excluirPrincesa(${index})">
+        Excluir
+    </button>
+
+    <button onclick="jogarPrincesa(${index})">
+        Jogar
+    </button>
+
+</div>
         `;
 
         lista.appendChild(card);
