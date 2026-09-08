@@ -1,472 +1,208 @@
-// ======================================================
-// Miraculous
-// Cadastro de Personagens
-// CRUD Completo
-// ======================================================
+// =====================================================
+// CRUD DE PERSONAGENS - MIRACULOUS
+// =====================================================
 
 
-// ========================================
-// Variáveis globais
-// ========================================
+// =====================================================
+// VARIÁVEIS
+// =====================================================
 
 let personagens = [];
 
 let personagemEditando = null;
 
 
-// ========================================
-// Elementos do HTML
-// ========================================
+// =====================================================
+// PEGANDO ELEMENTOS DO HTML
+// =====================================================
 
 const formulario =
-  document.getElementById("formPersonagem");
+    document.getElementById("formPersonagem");
 
-const campoNome =
-  document.getElementById("nome");
+const nome =
+    document.getElementById("nome");
 
-const campoIdade =
-  document.getElementById("idade");
+const idade =
+    document.getElementById("idade");
 
-const campoIdentidade =
-  document.getElementById("identidade");
+const identidade =
+    document.getElementById("identidade");
 
-const campoMiraculous =
-  document.getElementById("miraculous");
+const miraculous =
+    document.getElementById("miraculous");
 
-const campoPoder =
-  document.getElementById("poder");
+const poder =
+    document.getElementById("poder");
 
-const campoTipo =
-  document.getElementById("tipo");
+const tipo =
+    document.getElementById("tipo");
 
 const listaPersonagens =
-  document.getElementById("listaPersonagens");
+    document.getElementById("listaPersonagens");
 
 const contador =
-  document.getElementById("contador");
+    document.getElementById("contador");
 
-const tituloFormulario =
-  document.getElementById("tituloFormulario");
-
-const btnCadastrar =
-  document.getElementById("btnCadastrar");
+const btnSalvar =
+    document.getElementById("btnSalvar");
 
 const btnCancelar =
-  document.getElementById("btnCancelar");
+    document.getElementById("btnCancelar");
+
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
 
 
-// ========================================
-// Inicialização
-// ========================================
+// =====================================================
+// CARREGAR PERSONAGENS
+// =====================================================
 
-carregarPersonagens();
+function carregarPersonagens() {
 
+    const dados =
+        localStorage.getItem("personagens");
 
-if (personagens.length === 0) {
+    if (dados) {
 
-  criarPersonagensIniciais();
+        personagens = JSON.parse(dados);
 
+    } else {
+
+        personagens = [];
+    }
 }
 
 
-renderizarPersonagens();
+// =====================================================
+// SALVAR PERSONAGENS
+// =====================================================
+
+function salvarNoLocalStorage() {
+
+    localStorage.setItem(
+        "personagens",
+        JSON.stringify(personagens)
+    );
+}
 
 
-// ========================================
-// Eventos
-// ========================================
+// =====================================================
+// CREATE
+// =====================================================
 
-formulario.addEventListener(
-  "submit",
-  salvarPersonagem
-);
+function criarPersonagem(evento) {
 
-
-btnCancelar.addEventListener(
-  "click",
-  cancelarEdicao
-);
+    evento.preventDefault();
 
 
-// ========================================
-// Personagens iniciais
-// ========================================
+    const novoPersonagem = {
 
-function criarPersonagensIniciais() {
+        id: Date.now(),
 
-  personagens = [
+        nome: nome.value.trim(),
 
-    {
-      id: 1,
+        idade: idade.value,
 
-      nome: "Ladybug",
+        identidade: identidade.value.trim(),
 
-      idade: 15,
+        miraculous: miraculous.value,
 
-      identidade: "Marinette Dupain-Cheng",
+        poder: poder.value.trim(),
 
-      miraculous: "Joaninha",
+        tipo: tipo.value
 
-      poder: "Criar objetos",
-
-      tipo: "Heroína",
-
-      imagem: "img/ladybug.jpg"
-    },
+    };
 
 
-    {
-      id: 2,
-
-      nome: "Cat Noir",
-
-      idade: 15,
-
-      identidade: "Adrien Agreste",
-
-      miraculous: "Gato",
-
-      poder: "Destruição",
-
-      tipo: "Herói",
-
-      imagem: "img/catnoir.jpg"
-    },
+    personagens.push(novoPersonagem);
 
 
-    {
-      id: 3,
+    salvarNoLocalStorage();
 
-      nome: "Rena Rouge",
+    mostrarPersonagens();
 
-      idade: 15,
-
-      identidade: "Alya Césaire",
-
-      miraculous: "Raposa",
-
-      poder: "Ilusão",
-
-      tipo: "Heroína",
-
-      imagem: "img/renarouge.jpg"
-    },
+    limparFormulario();
+}
 
 
-    {
-      id: 4,
+// =====================================================
+// READ
+// =====================================================
 
-      nome: "Carapace",
+function mostrarPersonagens() {
 
-      idade: 16,
-
-      identidade: "Nino Lahiffe",
-
-      miraculous: "Tartaruga",
-
-      poder: "Proteção",
-
-      tipo: "Herói",
-
-      imagem: "img/carapace.jpg"
-    },
+    listaPersonagens.innerHTML = "";
 
 
-    {
-      id: 5,
+    // Se não tiver personagem
+    if (personagens.length === 0) {
 
-      nome: "Queen Bee",
+        listaPersonagens.innerHTML = `
+            <div class="sem-personagens">
+                Nenhum personagem cadastrado.
+            </div>
+        `;
 
-      idade: 15,
+        atualizarContador();
 
-      identidade: "Chloé Bourgeois",
-
-      miraculous: "Abelha",
-
-      poder: "Paralisia",
-
-      tipo: "Heroína",
-
-      imagem: "img/queenbee.jpg"
-    },
-
-
-    {
-      id: 6,
-
-      nome: "Hawk Moth",
-
-      idade: "Desconhecida",
-
-      identidade: "Gabriel Agreste",
-
-      miraculous: "Borboleta",
-
-      poder: "Akumatizar",
-
-      tipo: "Vilão",
-
-      imagem: "img/hawkmoth.jpg"
+        return;
     }
 
-  ];
 
+    // Criar um card para cada personagem
+    personagens.forEach(function (personagem) {
 
-  salvarPersonagens();
-}
+        const card =
+            document.createElement("div");
 
+        card.classList.add("card");
 
-// ========================================
-// CREATE
-// Cadastrar personagem
-// ========================================
 
-function cadastrarPersonagem() {
+        // Avatar
+        let avatar = "🐞";
 
-  const personagem = {
+        if (personagem.tipo === "Vilão") {
 
-    id: Date.now(),
+            avatar = "😈";
 
-    nome: campoNome.value,
+        } else if (personagem.tipo === "Aliado") {
 
-    idade: campoIdade.value,
+            avatar = "🤝";
 
-    identidade: campoIdentidade.value,
+        }
 
-    miraculous: campoMiraculous.value,
 
-    poder: campoPoder.value,
+        // HTML do card
+        card.innerHTML = `
 
-    tipo: campoTipo.value,
+            <div class="card-cabecalho">
 
-    imagem: "img/ladybug.jpg"
+                <div class="avatar">
+                    ${avatar}
+                </div>
 
-  };
+                <div>
 
+                    <h3>
+                        ${escaparHTML(personagem.nome)}
+                    </h3>
 
-  personagens.push(personagem);
+                    <span class="tipo">
+                        ${escaparHTML(personagem.tipo)}
+                    </span>
 
+                </div>
 
-  salvarPersonagens();
+            </div>
 
 
-  renderizarPersonagens();
+            <div class="parametros">
 
+                <p>
+                    <strong>🎂 Idade:</strong>
+                    ${escaparHTML(personagem.idade)}
+                    anos
+                </p>
 
-  limparFormulario();
-}
-
-
-// ========================================
-// UPDATE
-// Atualizar personagem
-// ========================================
-
-function atualizarPersonagem() {
-
-  const indice =
-    personagens.findIndex(
-      function (personagem) {
-
-        return personagem.id ===
-          personagemEditando;
-
-      }
-    );
-
-
-  if (indice !== -1) {
-
-    personagens[indice].nome =
-      campoNome.value;
-
-    personagens[indice].idade =
-      campoIdade.value;
-
-    personagens[indice].identidade =
-      campoIdentidade.value;
-
-    personagens[indice].miraculous =
-      campoMiraculous.value;
-
-    personagens[indice].poder =
-      campoPoder.value;
-
-    personagens[indice].tipo =
-      campoTipo.value;
-
-  }
-
-
-  salvarPersonagens();
-
-
-  renderizarPersonagens();
-
-
-  limparFormulario();
-
-
-  personagemEditando = null;
-
-
-  tituloFormulario.textContent =
-    "👤 Novo Personagem";
-
-
-  btnCadastrar.textContent =
-    "🐞 Cadastrar Personagem";
-
-
-  btnCancelar.hidden = true;
-}
-
-
-// ========================================
-// Cadastrar ou atualizar
-// ========================================
-
-function salvarPersonagem(evento) {
-
-  evento.preventDefault();
-
-
-  if (personagemEditando === null) {
-
-    cadastrarPersonagem();
-
-  } else {
-
-    atualizarPersonagem();
-
-  }
-}
-
-
-// ========================================
-// READ
-// Mostrar personagens
-// ========================================
-
-function renderizarPersonagens() {
-
-  listaPersonagens.innerHTML = "";
-
-
-  for (
-    let i = 0;
-    i < personagens.length;
-    i++
-  ) {
-
-    const personagem =
-      personagens[i];
-
-
-    const card =
-      document.createElement("div");
-
-
-    card.classList.add("card");
-
-
-    card.innerHTML = `
-
-      <div class="card-conteudo">
-
-        <img
-          src="${personagem.imagem}"
-          alt="${personagem.nome}"
-        >
-
-
-        <div class="informacoes">
-
-          <h3>
-            ${personagem.nome}
-          </h3>
-
-
-          <p>
-            🎂 <strong>Idade:</strong>
-            ${personagem.idade} anos
-          </p>
-
-
-          <p>
-            👤 <strong>Identidade:</strong>
-            ${personagem.identidade}
-          </p>
-
-
-          <p>
-            🐞 <strong>Miraculous:</strong>
-            ${personagem.miraculous}
-          </p>
-
-
-          <p>
-            ⚡ <strong>Poder:</strong>
-            ${personagem.poder}
-          </p>
-
-
-          <p>
-            🛡️ <strong>Tipo:</strong>
-            ${personagem.tipo}
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="botoes-card">
-
-        <button
-          class="btn-editar"
-          onclick="editarPersonagem(${personagem.id})"
-        >
-          ✏️ Editar
-        </button>
-
-
-        <button
-          class="btn-excluir"
-          onclick="excluirPersonagem(${personagem.id})"
-        >
-          🗑️ Excluir
-        </button>
-
-      </div>
-
-    `;
-
-
-    listaPersonagens.appendChild(card);
-
-  }
-
-
-  atualizarContador();
-}
-
-
-// ========================================
-// UPDATE
-// Editar personagem
-// ========================================
-
-function editarPersonagem(id) {
-
-  const personagem =
-    personagens.find(
-      function (personagem) {
-
-        return personagem.id === id;
-
-      }
-    );
-
-
-  if (personagem)
+                <p>
+                    <strong>👤 Identidade:</strong>
