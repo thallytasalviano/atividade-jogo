@@ -110,3 +110,12 @@ function excluirPrincesa(index) {
         mostrarPrincesas();
     }
 }
+function jogarPrincesa(index) {
+
+    localStorage.setItem(
+        "princesaSelecionada",
+        JSON.stringify(princesas[index])
+    );
+
+    window.location.href = "https://thallytasalviano.github.io/Cenario/";
+}
