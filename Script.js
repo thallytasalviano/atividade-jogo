@@ -1,208 +1,84 @@
-// =====================================================
-// CRUD DE PERSONAGENS - MIRACULOUS
-// =====================================================
+let princesas = JSON.parse(localStorage.getItem("princesas")) || [];
 
+function mostrar() {
 
-// =====================================================
-// VARIÁVEIS
-// =====================================================
+    let lista = document.getElementById("lista");
 
-let personagens = [];
+    lista.innerHTML = "";
 
-let personagemEditando = null;
+    princesas.forEach((princesa, index) => {
 
+        lista.innerHTML += `
+            <p>
+                 ${princesa}
 
-// =====================================================
-// PEGANDO ELEMENTOS DO HTML
-// =====================================================
+                <button onclick="editar(${index})">
+                    Editar
+                </button>
 
-const formulario =
-    document.getElementById("formPersonagem");
-
-const nome =
-    document.getElementById("nome");
-
-const idade =
-    document.getElementById("idade");
-
-const identidade =
-    document.getElementById("identidade");
-
-const miraculous =
-    document.getElementById("miraculous");
-
-const poder =
-    document.getElementById("poder");
-
-const tipo =
-    document.getElementById("tipo");
-
-const listaPersonagens =
-    document.getElementById("listaPersonagens");
-
-const contador =
-    document.getElementById("contador");
-
-const btnSalvar =
-    document.getElementById("btnSalvar");
-
-const btnCancelar =
-    document.getElementById("btnCancelar");
-
-const tituloFormulario =
-    document.getElementById("tituloFormulario");
-
-
-// =====================================================
-// CARREGAR PERSONAGENS
-// =====================================================
-
-function carregarPersonagens() {
-
-    const dados =
-        localStorage.getItem("personagens");
-
-    if (dados) {
-
-        personagens = JSON.parse(dados);
-
-    } else {
-
-        personagens = [];
-    }
-}
-
-
-// =====================================================
-// SALVAR PERSONAGENS
-// =====================================================
-
-function salvarNoLocalStorage() {
-
-    localStorage.setItem(
-        "personagens",
-        JSON.stringify(personagens)
-    );
-}
-
-
-// =====================================================
-// CREATE
-// =====================================================
-
-function criarPersonagem(evento) {
-
-    evento.preventDefault();
-
-
-    const novoPersonagem = {
-
-        id: Date.now(),
-
-        nome: nome.value.trim(),
-
-        idade: idade.value,
-
-        identidade: identidade.value.trim(),
-
-        miraculous: miraculous.value,
-
-        poder: poder.value.trim(),
-
-        tipo: tipo.value
-
-    };
-
-
-    personagens.push(novoPersonagem);
-
-
-    salvarNoLocalStorage();
-
-    mostrarPersonagens();
-
-    limparFormulario();
-}
-
-
-// =====================================================
-// READ
-// =====================================================
-
-function mostrarPersonagens() {
-
-    listaPersonagens.innerHTML = "";
-
-
-    // Se não tiver personagem
-    if (personagens.length === 0) {
-
-        listaPersonagens.innerHTML = `
-            <div class="sem-personagens">
-                Nenhum personagem cadastrado.
-            </div>
+                <button onclick="excluir(${index})">
+                    Excluir
+                </button>
+            </p>
         `;
+    });
+}
 
-        atualizarContador();
 
+function cadastrar() {
+
+    let nome = document.getElementById("nome").value;
+
+    if (nome === "") {
+        alert("Digite o nome da princesa!");
         return;
     }
 
+    princesas.push(nome);
 
-    // Criar um card para cada personagem
-    personagens.forEach(function (personagem) {
+    localStorage.setItem(
+        "princesas",
+        JSON.stringify(princesas)
+    );
 
-        const card =
-            document.createElement("div");
+    document.getElementById("nome").value = "";
 
-        card.classList.add("card");
-
-
-        // Avatar
-        let avatar = "🐞";
-
-        if (personagem.tipo === "Vilão") {
-
-            avatar = "😈";
-
-        } else if (personagem.tipo === "Aliado") {
-
-            avatar = "🤝";
-
-        }
+    mostrar();
+}
 
 
-        // HTML do card
-        card.innerHTML = `
+function editar(index) {
 
-            <div class="card-cabecalho">
+    let novoNome = prompt(
+        "Digite o novo nome:",
+        princesas[index]
+    );
 
-                <div class="avatar">
-                    ${avatar}
-                </div>
+    if (novoNome) {
 
-                <div>
+        princesas[index] = novoNome;
 
-                    <h3>
-                        ${escaparHTML(personagem.nome)}
-                    </h3>
+        localStorage.setItem(
+            "princesas",
+            JSON.stringify(princesas)
+        );
 
-                    <span class="tipo">
-                        ${escaparHTML(personagem.tipo)}
-                    </span>
-
-                </div>
-
-            </div>
+        mostrar();
+    }
+}
 
 
-            <div class="parametros">
+function excluir(index) {
 
-                <p>
-                    <strong>🎂 Idade:</strong>
-                    ${escaparHTML(personagem.idade)}
-                    anos
-                </p>
+    princesas.splice(index, 1);
 
-                <p>
-                    <strong>👤 Identidade:</strong>
+    localStorage.setItem(
+        "princesas",
+        JSON.stringify(princesas)
+    );
+
+    mostrar();
+}
+
+
+mostrar();
