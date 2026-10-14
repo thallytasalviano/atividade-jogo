@@ -1,4 +1,3 @@
-
 const formulario = document.getElementById("formPrincesa");
 const lista = document.getElementById("listaPrincesas");
 const botao = document.getElementById("botao");
@@ -6,94 +5,58 @@ const botao = document.getElementById("botao");
 let princesas = JSON.parse(localStorage.getItem("princesas")) || [];
 let editando = null;
 
-mostrarPrincesas();
-
-formulario.addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const princesa = {
-        nome: document.getElementById("nome").value,
-        reino: document.getElementById("reino").value,
-        idade: document.getElementById("idade").value,
-        poder: document.getElementById("poder").value
-    };
-
-    if (editando !== null) {
-        princesas[editando] = princesa;
-        editando = null;
-        botao.innerText = "Cadastrar";
-    } else {
-        princesas.push(princesa);
-    }
-
+function salvarPrincesas() {
     localStorage.setItem("princesas", JSON.stringify(princesas));
-
-    formulario.reset();
-    mostrarPrincesas();
-});
+}
 
 function mostrarPrincesas() {
-    lista.innerHTML = "";
+    lista.replaceChildren();
 
-    princesas.forEach(function(princesa, index) {
-        const card = document.createElement("div");
-        card.classList.add("card");
+    princesas.forEach((princesa, index) => {
+        const card = document.createElement("article");
+        card.className = "card";
 
-        card.innerHTML = `
-            <h2>👑 ${princesa.nome}</h2>
-            <p><strong>Reino:</strong> ${princesa.reino}</p>
-            <p><strong>Idade:</strong> ${princesa.idade}</p>
-            <p><strong>✨ Poder:</strong> ${princesa.poder}</p>
+        const titulo = document.createElement("h2");
+        titulo.textContent = "👑 " + princesa.nome;
 
-            <div class="botoes">
-                <button class="editar"
-                    onclick="editarPrincesa(${index})">
-                    Editar
-                </button>
+        const reino = document.createElement("p");
+        reino.textContent = "Reino: " + princesa.reino;
 
-                <button class="excluir"
-                    onclick="excluirPrincesa(${index})">
-                    Excluir
-                </button>
+        const idade = document.createElement("p");
+        idade.textContent = "Idade: " + princesa.idade;
 
-                <button onclick="jogarPrincesa(${index})">
-                    Jogar
-                </button>
-            </div>
-        `;
+        const poder = document.createElement("p");
+        poder.textContent = "Poder: " + princesa.poder;
 
+        const botoes = document.createElement("div");
+        botoes.className = "botoes";
+
+        const editar = document.createElement("button");
+        editar.type = "button";
+        editar.className = "editar";
+        editar.textContent = "Editar";
+        editar.addEventListener("click", () => editarPrincesa(index));
+
+        const excluir = document.createElement("button");
+        excluir.type = "button";
+        excluir.className = "excluir";
+        excluir.textContent = "Excluir";
+        excluir.addEventListener("click", () => excluirPrincesa(index));
+
+        const jogar = document.createElement("button");
+        jogar.type = "button";
+        jogar.className = "jogar";
+        jogar.textContent = "Jogar";
+        jogar.addEventListener("click", () => jogarPrincesa(index));
+
+        botoes.append(editar, excluir, jogar);
+        card.append(titulo, reino, idade, poder, botoes);
         lista.appendChild(card);
     });
 }
 
-function editarPrincesa(index) {
-    const princesa = princesas[index];
+formulario.addEventListener("submit", function(evento) {
+    evento.preventDefault();
 
-    document.getElementById("nome").value = princesa.nome;
-    document.getElementById("reino").value = princesa.reino;
-    document.getElementById("idade").value = princesa.idade;
-    document.getElementById("poder").value = princesa.poder;
-
-    editando = index;
-    botao.innerText = "Salvar alteração";
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function excluirPrincesa(index) {
-    if (confirm("Deseja realmente excluir esta princesa?")) {
-        princesas.splice(index, 1);
-        localStorage.setItem("princesas", JSON.stringify(princesas));
-        mostrarPrincesas();
-    }
-}
-
-function jogarPrincesa(index) {
-    localStorage.setItem(
-        "princesaSelecionada",
-        JSON.stringify(princesas[index])
-    );
-
-    window.location.href =
-        "https://thallytasalviano.github.io/Cenario/";
-}
+    const princesa = {
+        nome: document.getElementById("nome
