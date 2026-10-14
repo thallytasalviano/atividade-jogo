@@ -1,69 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Cadastro de Princesas</title>
-
     <link rel="stylesheet" href="Style.css">
-
+    <script src="Script.js" defer></script>
 </head>
-
 <body>
-
-    <div class="container">
-
-        <h1>Cadastro de Princesas</h1>
+    <main class="container">
+        <h1>👑 Cadastro de Princesas</h1>
 
         <form id="formPrincesa">
-
-            <input
-                type="text"
-                id="nome"
-                placeholder="Nome da princesa"
-                required
-            >
-
-            <input
-                type="text"
-                id="reino"
-                placeholder="Reino"
-                required
-            >
-
-            <input
-                type="number"
-                id="idade"
-                placeholder="Idade"
-                required
-            >
-
-            <input
-                type="text"
-                id="poder"
-                placeholder="Poder"
-                required
-            >
-
-
-
-            <button type="submit" id="botao">
-                Cadastrar
-            </button>
-
+            <input id="nome" placeholder="Nome da princesa" required>
+            <input id="reino" placeholder="Reino" required>
+            <input id="idade" type="number" min="1" placeholder="Idade" required>
+            <input id="poder" placeholder="Poder mágico" required>
+            <button id="botao" type="submit">Cadastrar</button>
         </form>
 
-        <div id="listaPrincesas"></div>
-
-    </div>
-
-    <script src="Script.js"></script>
-
+        <section id="listaPrincesas"></section>
+    </main>
 </body>
-
 </html>
-
