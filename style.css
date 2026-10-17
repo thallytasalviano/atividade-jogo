@@ -1,4 +1,4 @@
- * {
+* {
   box-sizing: border-box;
 }
 
@@ -12,6 +12,7 @@ body {
 }
 
 .container {
+  width: 100%;
   max-width: 700px;
   margin: auto;
   padding: 25px;
@@ -22,54 +23,70 @@ body {
 
 h1 {
   text-align: center;
-  margin-top: 0;
+  font-size: 30px;
+  margin: 0 0 30px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 input {
   width: 100%;
-  padding: 14px;
+  padding: 17px;
   border: 2px solid #f0c8df;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 12px;
+  font-size: 17px;
 }
 
 button {
-  padding: 12px;
   border: none;
   border-radius: 10px;
-  background: #d94f9a;
+  padding: 14px 5px;
   color: white;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
 }
 
-button:active {
-  transform: scale(0.98);
+#botao {
+  background: #d94f9a;
+  font-size: 17px;
 }
 
 .card {
-  margin-top: 20px;
-  padding: 18px;
+  margin-top: 25px;
+  padding: 22px;
   background: #fff1f8;
-  border-radius: 15px;
+  border-radius: 18px;
   overflow-wrap: anywhere;
+}
+
+.card h2 {
+  font-size: 26px;
+  margin: 10px 0 25px;
+}
+
+.card p {
+  font-size: 18px;
+  margin: 18px 0;
 }
 
 .botoes {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
-  margin-top: 15px;
+  margin-top: 25px;
+  width: 100%;
 }
 
 .botoes button {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 14px 2px;
+  font-size: 14px;
 }
 
 .editar {
@@ -81,5 +98,23 @@ button:active {
 }
 
 .jogar {
-  background: #7c45bd;
+  background: #d94f9a;
 }
+
+@media (max-width: 380px) {
+  .container {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .botoes {
+    gap: 5px;
+  }
+
+  .botoes button {
+    font-size: 12px;
+  }
+  }
