@@ -1,35 +1,50 @@
+
 const formulario = document.getElementById("formPrincesa");
 const lista = document.getElementById("listaPrincesas");
 const botao = document.getElementById("botao");
 
+const CHAVE = "princesas";
+const LINK_CENARIO = "https://thallytasalviano.github.io/Cenario/";
+
 let princesas = [];
 let editando = null;
 
+
 try {
-  const dados = JSON.parse(localStorage.getItem("princesas"));
-  princesas = Array.isArray(dados)
-    ? dados.map(p => ({
-        nome: p.nome || "",
-        reino: p.reino || "",
-        idade: p.idade || ""
-      }))
-    : [];
+  const dados = JSON.parse(localStorage.getItem(CHAVE));
+  princesas = Array.isArray(dados) ? dados : [];
+
+
+  princesas = princesas.map(p => ({
+    nome: p.nome || "",
+    reino: p.reino || "",
+    idade: p.idade || ""
+  }));
 } catch (erro) {
   princesas = [];
 }
 
-function salvar() {
+
+function salvarPrincesas() {
   try {
-    localStorage.setItem("princesas", JSON.stringify(princesas));
+    localStorage.setItem(CHAVE, JSON.stringify(princesas));
     return true;
   } catch (erro) {
-    alert("Não foi possível salvar os cadastros neste navegador.");
+    alert("Não foi possível salvar os cadastros.");
     return false;
   }
 }
 
+
 function mostrarPrincesas() {
   lista.replaceChildren();
+
+  if (princesas.length === 0) {
+    const aviso = document.createElement("p");
+    aviso.textContent = "Nenhuma princesa cadastrada ainda.";
+    lista.appendChild(aviso);
+    return;
+  }
 
   princesas.forEach((princesa, index) => {
     const card = document.createElement("article");
@@ -47,47 +62,51 @@ function mostrarPrincesas() {
     const botoes = document.createElement("div");
     botoes.className = "botoes";
 
+    
     const editar = document.createElement("button");
     editar.type = "button";
     editar.className = "editar";
     editar.textContent = "Editar";
 
     editar.addEventListener("click", () => {
-      document.getElementById("nome").value = princesa.nome;
-      document.getElementById("reino").value = princesa.reino;
-      document.getElementById("idade").value = princesa.idade;
-      editando = index;
-      botao.textContent = "Salvar alterações";
-      formulario.scrollIntoView({ behavior: "smooth" });
+      editarPrincesa(index);
     });
 
+    
     const excluir = document.createElement("button");
     excluir.type = "button";
     excluir.className = "excluir";
     excluir.textContent = "Excluir";
 
     excluir.addEventListener("click", () => {
-      if (!confirm("Deseja excluir esta princesa?")) return;
-
-      princesas.splice(index, 1);
-      editando = null;
-      formulario.reset();
-      botao.textContent = "Cadastrar";
-
-      if (salvar()) mostrarPrincesas();
+      excluirPrincesa(index);
     });
 
-    botoes.append(editar, excluir);
+    
+    const jogar = document.createElement("button");
+    jogar.type = "button";
+    jogar.className = "jogar";
+    jogar.textContent = "🎮 Jogar";
+
+    jogar.addEventListener("click", () => {
+      try {
+        localStorage.setItem(
+          "princesaEscolhida",
+          JSON.stringify(princesa)
+        );
+
+        window.location.href = LINK_CENARIO;
+      } catch (erro) {
+        alert("Não foi possível abrir o jogo.");
+      }
+    });
+
+    botoes.append(editar, excluir, jogar);
     card.append(titulo, reino, idade, botoes);
     lista.appendChild(card);
   });
-
-  if (princesas.length === 0) {
-    const aviso = document.createElement("p");
-    aviso.textContent = "Nenhuma princesa cadastrada ainda.";
-    lista.appendChild(aviso);
-  }
 }
+
 
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault();
@@ -97,7 +116,7 @@ formulario.addEventListener("submit", (evento) => {
   const idade = Number(document.getElementById("idade").value);
 
   if (!nome || !reino || !Number.isInteger(idade) || idade < 1) {
-    alert("Preencha corretamente os três campos.");
+    alert("Preencha corretamente o nome, o reino e a idade.");
     return;
   }
 
@@ -109,13 +128,50 @@ formulario.addEventListener("submit", (evento) => {
     princesas[editando] = princesa;
   }
 
-  if (salvar()) {
-    formulario.reset();
-    editando = null;
-    botao.textContent = "Cadastrar";
-    mostrarPrincesas();
-  }
+  if (!salvarPrincesas()) return;
+
+  mostrarPrincesas();
+  formulario.reset();
+  editando = null;
+  botao.textContent = "Cadastrar";
 });
 
+function editarPrincesa(index) {
+  const princesa = princesas[index];
+
+  document.getElementById("nome").value = princesa.nome;
+  document.getElementById("reino").value = princesa.reino;
+  document.getElementById("idade").value = princesa.idade;
+
+  editando = index;
+  botao.textContent = "Salvar alterações";
+
+  formulario.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+
+function excluirPrincesa(index) {
+  if (!confirm("Deseja excluir " + princesas[index].nome + "?")) {
+    return;
+  }
+
+  princesas.splice(index, 1);
+
+  if (editando === index) {
+    editando = null;
+    formulario.reset();
+    botao.textContent = "Cadastrar";
+  } else if (editando !== null && editando > index) {
+    editando--;
+  }
+
+  if (!salvarPrincesas()) return;
+
+  mostrarPrincesas();
+}
+
+
 mostrarPrincesas();
-        
